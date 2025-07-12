@@ -1,0 +1,70 @@
+tags:
+  - Contacts
+summary: Create a contact
+operationId: createContact
+description: 'Create a contact with form-data including optional image upload'
+security:
+  - bearerAuth: []
+requestBody:
+  required: true
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        required:
+          - name
+          - phoneNumber
+          - contactType
+        properties:
+          userId:
+            description: 'User`s ID who has this contact (MongoDB ObjectId)'
+            type: string
+            example: 686809896ac14799aa90b54a
+          name:
+            description: 'Contact`s name'
+            type: string
+            example: 'John Doe'
+          phoneNumber:
+            description: 'Contact`s phone number'
+            type: string
+            example: '+380730737373'
+          email:
+            description: 'Contact`s email'
+            type: string
+            example: 'example@mail.com'
+          isFavourite:
+            description: 'Whether is contact a favourite'
+            type: boolean
+            example: false
+          contactType:
+            description: 'Type of contact'
+            type: string
+            enum: ['work', 'home', 'personal']
+            example: 'personal'
+          photo:
+            description: 'Upload contact photo (image file)'
+            type: string
+            format: binary
+responses:
+  '201':
+    description: Successfully created a contact
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 201
+            message:
+              type: string
+              example: Successfully created a contact!
+            data:
+              type: object
+              $ref: ../../components/schemas/contact.yaml
+  '401':
+    $ref: ../../components/responses/401.yaml
