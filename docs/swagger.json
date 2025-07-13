@@ -200,11 +200,6 @@
                   "contactType"
                 ],
                 "properties": {
-                  "userId": {
-                    "description": "User`s ID who has this contact (MongoDB ObjectId)",
-                    "type": "string",
-                    "example": "686809896ac14799aa90b54a"
-                  },
                   "name": {
                     "description": "Contact`s name",
                     "type": "string",
